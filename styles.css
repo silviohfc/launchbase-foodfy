@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* { margin: 0; padding: 0; border: 0; font-family: Roboto;}
+
+:root {
+    --title: #111;
+    --desc: #777;
+}
+
+body {
+    position: relative;
+}
+
+.container {
+    max-width: 940px;
+    margin: 0 auto;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 96px;
+}
+
+/*=== HEADER ===*/
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav {
+    margin-left: 122px;
+}
+
+nav a {
+    margin-right: 30px;
+    text-decoration: none;
+    color: var(--title);
+}
+
+/*=== BANNER ===*/
+
+.banner {
+    margin-top: 30px;
+    padding: 0 60px;
+    background: #FBDFDB;
+    height: 366px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner .description h1 {
+    font-size: 32px;
+    color: var(--title)
+}
+
+.banner .description p{
+    width: 316px;
+    line-height: 28px;
+    text-align: left;
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+.banner img {
+    align-self: flex-end;
+}
+
+/*=== SECTION TOP RECIPES ===*/
+
+section#topRecipes {
+    margin-top: 50px;
+}
+
+section#topRecipes h1 {
+    font-size: 24px;
+    color: var(--title);
+}
+
+section#topRecipes div#topRecipesGrid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+/*=== RECIPE CARD ===*/
+
+.recipeCard {
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.recipeCard img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.recipeCard h4 {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--title)
+}
+
+.recipeCard p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: var(--desc)
+}
+
+/*=== FOOTER ===*/
+
+footer {
+    background: #eee;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 23px 0;
+}
+
+footer p {
+    font-size: 14px;
+    color: #999;
+}
