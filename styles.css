@@ -6,26 +6,32 @@
     --title: #111;
     --desc: #777;
 }
-
+html { height: 100%;}
 body {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .container {
     max-width: 940px;
     margin: 0 auto;
-    margin-top: 36px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    padding-bottom: 96px;
+    flex-grow: 1;
 }
 
 /*=== HEADER ===*/
 
 header {
+    margin-top: 36px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 940px;
 }
 
 nav {
@@ -41,7 +47,6 @@ nav a {
 /*=== BANNER ===*/
 
 .banner {
-    margin-top: 30px;
     padding: 0 60px;
     background: #FBDFDB;
     height: 366px;
@@ -53,6 +58,7 @@ nav a {
 
 .banner .description h1 {
     font-size: 32px;
+    line-height: 38px;
     color: var(--title)
 }
 
@@ -101,28 +107,49 @@ section#topRecipes div#topRecipesGrid {
 .recipeCard h4 {
     margin-top: 20px;
     font-size: 18px;
+    line-height: 21px;
     color: var(--title)
 }
 
 .recipeCard p {
     margin-top: 5px;
     font-size: 14px;
+    line-height: 16px;
     color: var(--desc)
 }
 
 /*=== FOOTER ===*/
 
 footer {
+    margin-top: 50px;
     background: #eee;
-    position: absolute;
-    left: 0;
-    bottom: 0;
     width: 100%;
     text-align: center;
     padding: 23px 0;
+    justify-self: flex-end;
 }
 
 footer p {
     font-size: 14px;
     color: #999;
+}
+
+/*=== ABOUT ===*/
+
+.about {
+    padding-top: 20px;
+}
+
+.about h1 {
+    color: var(--title);
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 18px;
+    color: #444;
+    line-height: 28px;
+    margin-bottom: 30px;
 }
