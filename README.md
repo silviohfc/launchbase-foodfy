@@ -8,7 +8,7 @@
     <a href="https://www.linkedin.com/in/silviohfc/">
         <img alt="Made by silviohfc" src="https://img.shields.io/badge/made%20by-silviohfc-orange">
     </a>
-    <img src="https://img.shields.io/github/repo-size/silviohfc/launchbase-foodfy">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
 </p>
 <p align="center">
     <img src="https://drive.google.com/uc?export=view&id=1oIkzRbRGrXvPzE9z2kF88UaXemEIJNsM" width="500">
