@@ -5,6 +5,7 @@
 :root {
     --title: #111;
     --desc: #777;
+    --alt: #444;
 }
 html { height: 100%;}
 body {
@@ -154,7 +155,7 @@ footer p {
 
 .about p {
     font-size: 18px;
-    color: #444;
+    color: var(--alt);
     line-height: 28px;
     margin-bottom: 30px;
 }
@@ -220,4 +221,72 @@ footer p {
 .modal-overlay.active {
     visibility: visible;
     opacity: 1;
+}
+
+/*=== RECIPE INFO ===*/
+
+.recipeInfo {
+    width: 940px;
+    text-align: center;
+}
+
+.recipeImg {
+    width: 100%;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+}
+
+.recipeInfo h4 {
+    margin-top: 50px;
+    font-size: 36px;
+    line-height: 42px;
+    color: var(--title)
+}
+
+.recipeInfo p {
+    margin-top: 4px;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--desc)
+}
+
+.recipeContent {
+    margin-top: 50px;
+    text-align: left;
+}
+
+.recipeContent h2 {
+    font-size: 24px;
+    color: var(--title);
+}
+
+.recipeContent span {
+    font-size: 12px;
+    margin-left: 8px;
+    color: #999;
+    cursor: pointer;
+}
+
+.recipeContent .description {
+    height: 5px;
+    margin-top: 20px;
+    list-style-position: inside;
+    color: var(--alt);
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 28px;
+    overflow: hidden;
+    transition: all ease-in-out 0.3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.recipeContent .description.active {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    transition: all ease-in-out 0.3s;
 }
