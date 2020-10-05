@@ -11,8 +11,11 @@
             {% for recipe in recipes %}
                 <div class="recipeCard" id="{{loop.index}}">
                     <img src="{{recipe.image}}" alt="Imagem {{recipe.title}}">
-                    <h4>{{recipe.title}}</h4>
-                    <p>{{recipe.author}}</p>
+                    <div class="desc">
+                        <h4>{{recipe.title}}</h4>   
+                        <p>por {{recipe.author}}</p>
+                        <a href="#">Visualizar</a>
+                    </div>
                 </div>
             {% endfor %}
 

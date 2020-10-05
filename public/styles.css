@@ -6,6 +6,7 @@
     --title: #111;
     --desc: #777;
     --alt: #444;
+    --action: #6558C3;
 }
 html { height: 100%;}
 body {
@@ -102,7 +103,7 @@ section#topRecipes div#topRecipesGrid {
 }
 
 .recipeCard:hover {
-    transform: scale(1.1);
+    transform: scale(1.03);
 }
 
 .recipeCard img {
@@ -249,4 +250,39 @@ header.admin {
 
 section#topRecipes div#topRecipesGrid.admin {
     margin-top: 30px;
+    width: 940px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+section#topRecipes div#topRecipesGrid.admin .recipeCard{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    width: auto;
+    margin: 0;
+}
+
+section#topRecipes div#topRecipesGrid.admin .recipeCard img{
+    height: 80px;
+}
+
+section#topRecipes div#topRecipesGrid.admin .recipeCard .desc{
+    align-self: start;
+    margin-left: 20px;
+}
+
+section#topRecipes div#topRecipesGrid.admin .recipeCard .desc h4{
+    margin: 0;
+    font-weight: initial;
+}
+
+section#topRecipes div#topRecipesGrid.admin .recipeCard .desc p{
+    margin-bottom: 10px;
+}
+
+section#topRecipes div#topRecipesGrid.admin .recipeCard .desc a{
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--action);
 }
