@@ -1,0 +1,24 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %}
+
+    <section id="topRecipes">
+
+        <h1>Gerenciar receitas</h1>
+
+        <div id="topRecipesGrid" class="admin">
+
+            {% for recipe in recipes %}
+                <div class="recipeCard" id="{{loop.index}}">
+                    <img src="{{recipe.image}}" alt="Imagem {{recipe.title}}">
+                    <h4>{{recipe.title}}</h4>
+                    <p>{{recipe.author}}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <script src="/scripts.js"></script>
+{% endblock %}
+   
