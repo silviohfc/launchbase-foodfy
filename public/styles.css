@@ -94,6 +94,11 @@ section#topRecipes div#topRecipesGrid {
     gap: 20px;
 }
 
+section#topRecipes .recipeCard img {
+    height: 140px;
+    border-radius: 15px;
+}
+
 /*=== RECIPE CARD ===*/
 
 .recipeCard,
@@ -109,10 +114,18 @@ section#topRecipes div#topRecipesGrid {
     transform: scale(1.03);
 }
 
-.recipeCard img,
-.adminRecipeCard img {
+.recipeCard .img,
+.adminRecipeCard .img {
     width: 100%;
+    height: 100%;
     border-radius: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.recipeCard .img {
+    min-height: 140px;
 }
 
 .recipeCard h4,
@@ -345,9 +358,6 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
 /*=== ADMIN FORM ===*/
 .formItem {
     margin-bottom: 30px;
-}
-.formItem:last-child {
-    margin: 0;
 }
 
 .formItem h5 {

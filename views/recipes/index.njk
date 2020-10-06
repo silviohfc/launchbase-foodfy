@@ -7,7 +7,7 @@
 
             {% for recipe in recipes %}
                 <div class="recipeCard" id="{{loop.index}}">
-                    <img src="{{recipe.image}}" alt="Imagem {{recipe.title}}">
+                    <div class="img" style="background-image: url({{ recipe.image }});"></div>
                     <h4>{{recipe.title}}</h4>
                     <p>{{recipe.author}}</p>
                 </div>

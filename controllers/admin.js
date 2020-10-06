@@ -49,9 +49,16 @@ exports.edit = (req, res) => {
 }
 
 exports.put = (req, res) => {
-    const { id } = req.body
+    const { id, image, title, author, ingredients, steps, information } = req.body
     
-    data.recipes[id - 1] = req.body
+    data.recipes[id - 1] = {
+        image,
+        title,
+        author,
+        ingredients,
+        steps,
+        information
+    }
 
     fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
         if (err) return res.send("Write file error!")

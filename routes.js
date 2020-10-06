@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 const admin = require('./controllers/admin')
+const data = require('./data.json')
 
 const recipes = require('./data')
 
@@ -11,14 +12,14 @@ routes.get("/about", (req, res) => {
     return res.render("about")
 })
 routes.get("/recipes", (req, res) => {
-    return res.render("recipes/index", { recipes })
+    return res.render("recipes/index", { recipes: data.recipes })
 })
 routes.get("/recipes/:index", (req, res) => {
     const recipeIndex = req.params.index
     if (!recipes[recipeIndex-1]) {
         return res.send("A receita não existe!")
     }else {
-        return res.render("recipes/recipe_info", { recipe: recipes[recipeIndex-1] })
+        return res.render("recipes/recipe_info", { recipe: data.recipes[recipeIndex-1] })
     }
 })
 

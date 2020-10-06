@@ -24,8 +24,8 @@
             <div id="preparationMode">
                 <h2>Modo de preparo <span class="descToggle">MOSTRAR</span></h2>
                 <div class="description">
-                    {% for preparation in recipe.preparation %}
-                        <p>{{preparation}}</p>
+                    {% for step in recipe.steps %}
+                        <p>{{step}}</p>
                     {% endfor %}
                 </div>
             </div>
