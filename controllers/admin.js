@@ -44,6 +44,18 @@ exports.edit = (req, res) => {
     if(!data.recipes[recipeId - 1]) {
         res.send("A receita não existe")
     } else {
-        res.render("admin/edit", { recipe: data.recipes[recipeId - 1] })
+        res.render("admin/edit", { recipe: data.recipes[recipeId - 1], recipeId })
     }
+}
+
+exports.put = (req, res) => {
+    const { id } = req.body
+    
+    data.recipes[id - 1] = req.body
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
+        if (err) return res.send("Write file error!")
+
+        return res.redirect(`/admin/recipes/${id}`)
+    })
 }

@@ -37,6 +37,7 @@ function addInput(event) {
     if (newField.children[0].value = "") return false
 
     newField.children[0].value = ""
+    newField.children[0].placeholder = ""
     
     if (buttonName === 'ingredient') {
         ingredients.appendChild(newField)

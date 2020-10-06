@@ -28,5 +28,6 @@ routes.get("/admin/recipes/:id", admin.show)
 routes.get("/admin/recipes/:id/edit", admin.edit)
 
 routes.post("/admin/recipes", admin.post)
+routes.put("/admin/recipes", admin.put)
 
 module.exports = routes
