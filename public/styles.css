@@ -313,6 +313,10 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
     justify-self: end;
 }
 
+.actionHeader .actionButtons .actionButton {
+    display: inline-block;
+}
+
 .actionHeader a,
 .actionHeader button[type="submit"] {
     text-align: center;
@@ -322,7 +326,7 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
     text-decoration: none;
     font-size: 16px;
     border-radius: 4px;
-    margin-left: 10px;
+    margin-left: 5px;
     font-weight: bold;
     cursor: pointer;
     justify-self: end;
@@ -333,7 +337,7 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
     filter: brightness(1.1);
 }
 
-.actionButtons button:first-child {
+.actionButtons button#delete {
     margin: 0;
     background-color: var(--actionDel);
 }
