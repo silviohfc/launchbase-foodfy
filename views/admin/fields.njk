@@ -1,23 +1,55 @@
 <div class="formItem">
     <h5>Imagem da receita</h5>
-    <input type="text" name="image" placeholder="http://" required>
+    <input 
+        type="text" 
+        name="image" 
+        placeholder="http://" 
+        value="{{ recipe.image }}"
+        required
+    >
 </div>
 
 <div class="formItem">
     <h5>Título da receita</h5>
-    <input type="text" name="title" placeholder="Ex.: Bolo de cenoura" required>
+    <input 
+        type="text" 
+        name="title" 
+        placeholder="Ex.: Bolo de cenoura" 
+        value="{{ recipe.title }}"
+        required
+    >
 </div>
 
 <div class="formItem">
     <h5>Autor</h5>
-    <input type="text" name="author" placeholder="Ex.: Silvio Henrique" required>
+    <input 
+        type="text" 
+        name="author" 
+        placeholder="Ex.: Silvio Henrique" 
+        value="{{ recipe.author }}"
+        required
+    >
 </div>
 
 <div class="formItem">
     <h5>Ingredientes</h5>
     <div id="ingredients">
         <div class="ingredient">
-            <input type="text" name="ingredients[]" placeholder="Ex.: 1 xícara de farinha" required>
+
+            {% if not recipe %}
+                <input type="text" name="ingredients[]" placeholder="Ex.: 1 xícara de farinha" required>
+            {% endif %}
+
+            {% for ingredient in recipe.ingredients %}
+                <input 
+                    type="text" 
+                    name="ingredients[]" 
+                    placeholder="Ex.: 1 xícara de farinha" 
+                    value="{{ ingredient }}"
+                    required
+                >
+            {% endfor %}
+
         </div>
     </div>
     <button type="button" class="add-input" name="ingredient">Adicionar novo ingrediente</button>
@@ -27,7 +59,21 @@
     <h5>Modo de preparo</h5>
     <div id="steps">
         <div class="step">
-            <input type="text" name="steps[]" placeholder="Ex.: Colocar no forno por 40 minutos" required>
+
+            {% if not recipe %}
+                <input type="text" name="steps[]" placeholder="Ex.: Colocar no forno por 40 minutos" required>
+            {% endif %}
+
+            {% for step in recipe.steps %}
+                <input 
+                    type="text" 
+                    name="steps[]" 
+                    placeholder="Ex.: 1 xícara de farinha" 
+                    value="{{ step }}"
+                    required
+                >
+            {% endfor %}
+
         </div>
     </div>
     <button type="button" class="add-input" name="step">Adicionar novo passo</button>
@@ -35,5 +81,5 @@
 
 <div class="formItem">
     <h5>Informações adicionais</h5>
-    <textarea type="text" name="information"></textarea>
+    <textarea type="text" name="information">{{ recipe.information }}</textarea>
 </div>

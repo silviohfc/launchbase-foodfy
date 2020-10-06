@@ -7,6 +7,7 @@
     --desc: #777;
     --alt: #444;
     --action: #6558C3;
+    --actionDel: #DC4747;
 }
 html { height: 100%;}
 body {
@@ -95,7 +96,8 @@ section#topRecipes div#topRecipesGrid {
 
 /*=== RECIPE CARD ===*/
 
-.recipeCard {
+.recipeCard,
+.adminRecipeCard {
     width: 300px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -107,19 +109,22 @@ section#topRecipes div#topRecipesGrid {
     transform: scale(1.03);
 }
 
-.recipeCard img {
+.recipeCard img,
+.adminRecipeCard img {
     width: 100%;
     border-radius: 15px;
 }
 
-.recipeCard h4 {
+.recipeCard h4,
+.adminRecipeCard h4 {
     margin-top: 20px;
     font-size: 18px;
     line-height: 21px;
     color: var(--title)
 }
 
-.recipeCard p {
+.recipeCard p,
+.adminRecipeCard p {
     margin-top: 5px;
     font-size: 14px;
     line-height: 16px;
@@ -256,33 +261,34 @@ section#topRecipes div#topRecipesGrid.admin {
     gap: 20px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .recipeCard{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard{
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     align-items: center;
     width: auto;
     margin: 0;
+    cursor: initial;
 }
 
-section#topRecipes div#topRecipesGrid.admin .recipeCard img{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard img{
     height: 80px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .recipeCard .desc{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc{
     align-self: start;
     margin-left: 20px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .recipeCard .desc h4{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc h4{
     margin: 0;
     font-weight: initial;
 }
 
-section#topRecipes div#topRecipesGrid.admin .recipeCard .desc p{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc p{
     margin-bottom: 10px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .recipeCard .desc a{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
     text-decoration: none;
     font-size: 14px;
     color: var(--action);
@@ -302,17 +308,34 @@ section#topRecipes div#topRecipesGrid.admin .recipeCard .desc a{
     text-align: left;
 }
 
+.actionHeader .actionButtons {
+    align-self: center;
+    justify-self: end;
+}
+
 .actionHeader a,
 .actionHeader button[type="submit"] {
     text-align: center;
     background-color: var(--action);
-    align-self: center;
-    justify-self: end;
     padding: 9px 20px;
     color: white;
     text-decoration: none;
     font-size: 16px;
     border-radius: 4px;
+    margin-left: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    justify-self: end;
+}
+
+.actionHeader a:hover,
+.actionHeader button[type="submit"]:hover {
+    filter: brightness(1.1);
+}
+
+.actionButtons button:first-child {
+    margin: 0;
+    background-color: var(--actionDel);
 }
 
 /*=== ADMIN FORM ===*/

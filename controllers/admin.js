@@ -34,6 +34,16 @@ exports.show = (req, res) => {
     if(!data.recipes[recipeId - 1]) {
         res.send("A receita não existe")
     } else {
-        res.render("admin/recipe_info", { recipe: data.recipes[recipeId - 1] })
+        res.render("admin/recipe_info", { recipe: data.recipes[recipeId - 1], recipeId })
+    }
+}
+
+exports.edit = (req, res) => {
+    const recipeId = req.params.id
+    
+    if(!data.recipes[recipeId - 1]) {
+        res.send("A receita não existe")
+    } else {
+        res.render("admin/edit", { recipe: data.recipes[recipeId - 1] })
     }
 }
