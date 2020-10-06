@@ -9,9 +9,9 @@
             <a href="#">Editar receita</a>
         </div>
 
-        <div class="recipeImg" style="background-image: url({{recipe.image}});"></div>
-        <h4>{{recipe.title}}</h4>
-        <p>por {{recipe.author}}</p>
+        <div class="recipeImg" style="background-image: url({{ recipe.image }});"></div>
+        <h4>{{ recipe.title }}</h4>
+        <p>por {{ recipe.author }}</p>
 
         <div class="recipeContent">
 
@@ -29,8 +29,8 @@
             <div id="preparationMode">
                 <h2>Modo de preparo</h2>
                 <div class="description active">
-                    {% for preparation in recipe.preparation %}
-                        <p>{{preparation}}</p>
+                    {% for step in recipe.steps %}
+                        <p>{{ step }}</p>
                     {% endfor %}
                 </div>
             </div>
