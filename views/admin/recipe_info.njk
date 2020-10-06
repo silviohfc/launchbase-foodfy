@@ -1,0 +1,51 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %}
+
+    <div class="recipeInfo">
+        
+        <div class="actionHeader">
+            <h2>Receita: {{ recipe.title }}</h2>
+            <a href="#">Editar receita</a>
+        </div>
+
+        <div class="recipeImg" style="background-image: url({{recipe.image}});"></div>
+        <h4>{{recipe.title}}</h4>
+        <p>por {{recipe.author}}</p>
+
+        <div class="recipeContent">
+
+            <div id="ingredients">
+                <h2>Ingredientes</h2>
+                <div class="description active">
+                    <ul>
+                        {% for ingredient in recipe.ingredients %}
+                            <li>{{ingredient}};</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div id="preparationMode">
+                <h2>Modo de preparo</h2>
+                <div class="description active">
+                    {% for preparation in recipe.preparation %}
+                        <p>{{preparation}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="extraInfo">
+                <h2>Informações adicionais </h2>
+                <div class="description active">
+                    <p>{{recipe.information}}</p>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <script src="/scripts.js"></script>
+
+{% endblock %}

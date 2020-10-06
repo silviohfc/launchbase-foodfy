@@ -1,0 +1,29 @@
+<div class="formItem">
+    <h5>Imagem da receita</h5>
+    <input type="text" name="image" placeholder="http://">
+</div>
+
+<div class="formItem">
+    <h5>Ingredientes</h5>
+    <div id="ingredients">
+        <div class="ingredient">
+            <input type="text" name="ingredients[]" placeholder="Ex.: 1 xícara de farinha">
+        </div>
+    </div>
+    <button type="button" class="add-input" name="ingredient">Adicionar novo ingrediente</button>
+</div>
+
+<div class="formItem">
+    <h5>Modo de preparo</h5>
+    <div id="steps">
+        <div class="step">
+            <input type="text" name="steps[]" placeholder="Ex.: Colocar no forno por 40 minutos">
+        </div>
+    </div>
+    <button type="button" class="add-input" name="step">Adicionar novo passo</button>
+</div>
+
+<div class="formItem">
+    <h5>Informações adicionais</h5>
+    <textarea type="text" name="information"></textarea>
+</div>

@@ -23,5 +23,9 @@ routes.get("/recipes/:index", (req, res) => {
 })
 
 routes.get("/admin/recipes", admin.index)
+routes.get("/admin/recipes/create", admin.create)
+routes.get("/admin/recipes/:id", admin.show)
+
+routes.post("/admin/recipes", admin.post)
 
 module.exports = routes

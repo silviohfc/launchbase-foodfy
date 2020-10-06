@@ -19,6 +19,7 @@ body {
 }
 
 .container {
+    width: 940px;
     max-width: 940px;
     margin: 0 auto;
     margin-top: 30px;
@@ -187,7 +188,7 @@ footer p {
 .recipeInfo p {
     margin-top: 4px;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 28px;
     color: var(--desc)
 }
 
@@ -285,4 +286,72 @@ section#topRecipes div#topRecipesGrid.admin .recipeCard .desc a{
     text-decoration: none;
     font-size: 14px;
     color: var(--action);
+    font-weight: bold;
+}
+
+/*=== ADMIN RECIPE INFO ===*/
+.actionHeader {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.actionHeader h2 {
+    color: var(--title);
+    text-align: left;
+}
+
+.actionHeader a,
+.actionHeader button[type="submit"] {
+    text-align: center;
+    background-color: var(--action);
+    align-self: center;
+    justify-self: end;
+    padding: 9px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+/*=== ADMIN FORM ===*/
+.formItem {
+    margin-bottom: 30px;
+}
+.formItem:last-child {
+    margin: 0;
+}
+
+.formItem h5 {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+    color: var(--title);
+}
+
+.formItem input,
+.formItem textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.formItem textarea {
+    resize: none;
+    width: 100%;
+    height: 257px;
+}
+
+.formItem button {
+    background: none;
+    color: var(--action);
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 15px;
+    outline: none;
+    cursor: pointer;
 }
