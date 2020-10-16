@@ -1,6 +1,8 @@
 const express = require('express')
 const routes = express.Router()
-const admin = require('./app/controllers/admin')
+
+const recipes = require('./app/controllers/recipes')
+const chefs = require('./app/controllers/chefs')
 const data = require('../data.json')
 
 routes.get("/", (req, res) => {
@@ -21,13 +23,23 @@ routes.get("/recipes/:index", (req, res) => {
     }
 })
 
-routes.get("/admin/recipes", admin.index)
-routes.get("/admin/recipes/create", admin.create)
-routes.get("/admin/recipes/:id", admin.show)
-routes.get("/admin/recipes/:id/edit", admin.edit)
+/* -------------------------------------------------------------------------- */
+/*                                ADMIN RECIPES                               */
+/* -------------------------------------------------------------------------- */
 
-routes.post("/admin/recipes", admin.post)
-routes.put("/admin/recipes", admin.put)
-routes.delete("/admin/recipes", admin.delete)
+routes.get("/admin/recipes", recipes.index)
+routes.get("/admin/recipes/create", recipes.create)
+routes.get("/admin/recipes/:id", recipes.show)
+routes.get("/admin/recipes/:id/edit", recipes.edit)
+
+routes.post("/admin/recipes", recipes.post)
+routes.put("/admin/recipes", recipes.put)
+routes.delete("/admin/recipes", recipes.delete)
+
+/* -------------------------------------------------------------------------- */
+/*                                 ADMIN CHEFS                                */
+/* -------------------------------------------------------------------------- */
+
+routes.get("/admin/chefs", chefs.index)
 
 module.exports = routes
