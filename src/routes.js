@@ -1,9 +1,7 @@
 const express = require('express')
 const routes = express.Router()
-const admin = require('./controllers/admin')
-const data = require('./data.json')
-
-const recipes = require('./data')
+const admin = require('./app/controllers/admin')
+const data = require('../data.json')
 
 routes.get("/", (req, res) => {
     return res.render("index")
