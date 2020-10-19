@@ -183,12 +183,14 @@ footer p {
 
 /*=== RECIPE INFO ===*/
 
-.recipeInfo {
+.recipeInfo,
+.chefInfo {
     width: 940px;
     text-align: center;
 }
 
-.recipeImg {
+.recipeImg,
+.chefImg {
     width: 100%;
     height: 280px;
     background-repeat: no-repeat;
@@ -197,14 +199,27 @@ footer p {
     border-radius: 15px;
 }
 
-.recipeInfo h4 {
+.chefImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.recipeInfo h4,
+.chefInfo h4 {
     margin-top: 50px;
     font-size: 36px;
     line-height: 42px;
     color: var(--title)
 }
 
-.recipeInfo p {
+.chefInfo h4 {
+    margin-top: 30px;
+}
+
+.recipeInfo p,
+.chefInfo p {
     margin-top: 4px;
     font-size: 20px;
     line-height: 28px;
@@ -300,6 +315,12 @@ section#topRecipes div#topRecipesGrid.admin {
     width: 940px;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    text-align: left;
+}
+
+section#topRecipes h1 {
+    margin-top: 50px;
+    text-align: left;
 }
 
 section#topRecipes div#topRecipesGrid.admin .adminRecipeCard,
@@ -316,7 +337,8 @@ section#topRecipes div#topRecipesGrid.admin .adminChefCard {
     grid-template-columns: 64px 1fr;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard img{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard img,
+.adminRecipeCard .img{
     height: 80px;
 }
 
@@ -335,6 +357,7 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc,
 section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc{
     align-self: start;
     margin-left: 20px;
+    line-height: 21px;
 }
 
 section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc{
@@ -345,6 +368,8 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc h4,
 section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc h4{
     margin: 0;
     font-weight: initial;
+    font-size: 16px;
+    line-height: 21px;
 }
 
 section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc h4 {
@@ -353,6 +378,8 @@ section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc h4 {
 
 section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc p{
     margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 16px;
 }
 
 section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a,

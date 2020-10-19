@@ -7,38 +7,17 @@
         <h1>Gerenciar chefs</h1>
 
         <div id="topRecipesGrid" class="admin chefs">
+            {% for chef in chefs %}
 
-            <div class="adminChefCard" id="{{loop.index}}">
-                <div class="img" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);"></div>
-                <div class="desc">
-                    <h4>Silvio Henrique</h4>
-                    <a href="/admin/recipes/{{ loop.index }}">Visualizar</a>
+                <div class="adminChefCard" id="{{ chef.id }}">
+                    <div class="img" style="background-image: url({{ chef.avatar_url }});"></div>
+                    <div class="desc">
+                        <h4>{{ chef.name }}</h4>
+                        <a href="/admin/chefs/{{ chef.id }}">Visualizar</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="adminChefCard" id="{{loop.index}}">
-                <div class="img" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);"></div>
-                <div class="desc">
-                    <h4>Silvio Henrique</h4>
-                    <a href="/admin/recipes/{{ loop.index }}">Visualizar</a>
-                </div>
-            </div>
-
-            <div class="adminChefCard" id="{{loop.index}}">
-                <div class="img" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);"></div>
-                <div class="desc">
-                    <h4>Silvio Henrique</h4>
-                    <a href="/admin/recipes/{{ loop.index }}">Visualizar</a>
-                </div>
-            </div>
-
-            <div class="adminChefCard" id="{{loop.index}}">
-                <div class="img" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80);"></div>
-                <div class="desc">
-                    <h4>Silvio Henrique</h4>
-                    <a href="/admin/recipes/{{ loop.index }}">Visualizar</a>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
     </section>

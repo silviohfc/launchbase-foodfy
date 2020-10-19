@@ -1,0 +1,40 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %}
+
+    <div class="chefInfo">
+        
+        <div class="actionHeader">
+            <h2>Chef: {{ chef.name }}</h2>
+            <a href="/admin/chefs/{{ chef.id }}/edit">Editar Chef</a>
+        </div>
+
+        <div class="chefImg" style="background-image: url({{ chef.avatar_url }});"></div>
+        <h4>{{ chef.name }}</h4>
+        <p>0 receitas</p>
+
+        <section id="topRecipes">
+
+        <h1>Gerenciar receitas</h1>
+
+        <div id="topRecipesGrid" class="admin">
+
+            <div class="adminRecipeCard" id="{{loop.index}}">
+                <div class="img" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg);"></div>
+                <div class="desc">
+                    <h4>Receita</h4>   
+                    <p>por {{chef.name}}</p>
+                    <a href="/admin/recipes/{{ loop.index }}">Visualizar</a>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </section>
+        
+    </div>
+
+    <script src="/scripts.js"></script>
+
+{% endblock %}

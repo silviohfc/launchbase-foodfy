@@ -1,0 +1,44 @@
+{% extends "admin/layout.njk" %}
+
+{% block content %}
+
+        <div class="actionHeader">
+            <h2>Editando chef</h2>
+            <div class="actionButtons">
+                <div class="actionButton">
+
+                    <form action="/admin/chefs?_method=DELETE" method="POST" id="form-delete">
+                        <input type="hidden" name="id" value="{{ chef.id }}">
+                        <button type="submit" id="delete">Deletar</a>
+                    </form>
+                    
+                </div>
+
+                <div class="actionButton">
+                    
+                    <form action="/admin/chefs?_method=PUT" method="POST">
+    
+                    <input type="hidden" name="id" value="{{ chef.id }}">
+                    <button type="submit">Salvar chef</a>
+                </div>
+            </div>
+        </div>
+
+        {% include "admin/chefs/fields.njk" %}
+        
+    </form>
+
+    <script src="/scripts.js"></script>
+    
+    <script>
+        const formDelete = document.querySelector("#form-delete")
+        
+        formDelete.addEventListener("submit", e => {
+            const confirmation = confirm("Tem certeza que deseja deletar este chef?")
+            if(!confirmation) {
+                e.preventDefault()
+            }
+        })
+    </script>
+{% endblock %}
+   

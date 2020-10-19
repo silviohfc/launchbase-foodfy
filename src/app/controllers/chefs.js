@@ -1,83 +1,62 @@
+const Chef = require('../models/Chef')
+
 module.exports = {
     index(req, res) {
-        return res.render("admin/chefs/index")
+        Chef.all(chefs => {
+            return res.render("admin/chefs/index", { chefs })
+        })
     },
     
     create(req, res) {
-        return res.render("admin/recipes/create")
+        return res.render("admin/chefs/create")
     },
     
     post(req, res) {
-        let { image, title, author, ingredients, steps, information } = req.body
-    
-        data.recipes.push({
-            image,
-            title,
-            author,
-            ingredients,
-            steps,
-            information
-        })
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
-            if (err) return res.send("Write file error!")
-    
-            return res.redirect("/admin/recipes")
+        Chef.create(req.body, chef => {
+            return res.redirect(`/admin/chefs/${ chef.id }`)
         })
     },
     
     show(req, res) {
-        const recipeId = req.params.id
-        
-        if(!data.recipes[recipeId - 1]) {
-            res.send("A receita não existe")
-        } else {
-            res.render("admin/recipes/recipe_info", { recipe: data.recipes[recipeId - 1], recipeId })
-        }
+        const chefId = req.params.id
+
+        Chef.find(chefId, chef => {
+            if (!chef) return res.send("O chef não existe")
+
+            return res.render("admin/chefs/chef_info", { chef })
+        })
+
     },
     
     edit(req, res) {
-        const recipeId = req.params.id
+        const chefId = req.params.id
         
-        if(!data.recipes[recipeId - 1]) {
-            res.send("A receita não existe")
-        } else {
-            res.render("admin/recipes/edit", { recipe: data.recipes[recipeId - 1], recipeId })
-        }
+        Chef.find(chefId, chef => {
+            if (!chef) return res.send("O chef não existe")
+
+            return res.render("admin/chefs/edit", { chef })
+        })
     },
     
     put(req, res) {
-        const { id, image, title, author, ingredients, steps, information } = req.body
-        
-        data.recipes[id - 1] = {
-            image,
-            title,
-            author,
-            ingredients,
-            steps,
-            information
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send("Por favor, preencha todos os campos")
+            }
         }
     
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
-            if (err) return res.send("Write file error!")
-    
-            return res.redirect(`/admin/recipes/${id}`)
+        Chef.update(req.body, () => {
+            return res.redirect(`chefs/${req.body.id}`)
         })
     },
     
     delete(req, res) {
         const { id } = req.body
     
-        const filteredRecipes = data.recipes.filter((recipe, i) => {
-            return i != id - 1
-        })
-    
-        data.recipes = filteredRecipes
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
-            if (err) return res.send("Write file error!")
-    
-            return res.redirect("/admin/recipes")
+        Chef.delete(id, () => {
+            return res.redirect("/admin/chefs")
         })
     }
 }
