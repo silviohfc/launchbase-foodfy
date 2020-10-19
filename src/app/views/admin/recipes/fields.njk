@@ -21,14 +21,15 @@
 </div>
 
 <div class="formItem">
-    <h5>Autor</h5>
-    <input 
-        type="text" 
-        name="author" 
-        placeholder="Ex.: Silvio Henrique" 
-        value="{{ recipe.author }}"
+    <h5>Chef</h5>
+    <select
+        name="chef_id"
         required
     >
+        {% for chef in chefs %}
+            <option value="{{ chef.id }}" {% if recipe.author == chef.name %} selected {% endif %}>{{ chef.name }}</option>
+        {% endfor %}
+    </select>
 </div>
 
 <div class="formItem">
@@ -66,7 +67,7 @@
             </div>
             {% endif %}
 
-            {% for step in recipe.steps %}
+            {% for step in recipe.preparation %}
             <div class="step">
                 <input 
                     type="text" 

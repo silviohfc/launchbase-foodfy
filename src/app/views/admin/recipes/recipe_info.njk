@@ -6,7 +6,7 @@
         
         <div class="actionHeader">
             <h2>Receita: {{ recipe.title }}</h2>
-            <a href="/admin/recipes/{{ recipeId }}/edit">Editar receita</a>
+            <a href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
         </div>
 
         <div class="recipeImg" style="background-image: url({{ recipe.image }});"></div>
@@ -29,7 +29,7 @@
             <div id="preparationMode">
                 <h2>Modo de preparo</h2>
                 <div class="description active">
-                    {% for step in recipe.steps %}
+                    {% for step in recipe.preparation %}
                         <p>{{ step }}</p>
                     {% endfor %}
                 </div>

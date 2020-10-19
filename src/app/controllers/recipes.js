@@ -1,85 +1,65 @@
-const fs = require('fs')
-const data = require('../../../data.json')
+const Recipe = require('../models/Recipe')
 
 module.exports = {
     index(req, res) {
-        return res.render("admin/recipes/index", { recipes: data.recipes })
+        Recipe.all(recipes => {
+            return res.render("admin/recipes/index", { recipes })
+        })
     },
     
     create(req, res) {
-        return res.render("admin/recipes/create")
+        Recipe.chefSelectOptions(chefs => {
+            return res.render("admin/recipes/create", { chefs })
+        })        
     },
     
     post(req, res) {
-        let { image, title, author, ingredients, steps, information } = req.body
-    
-        data.recipes.push({
-            image,
-            title,
-            author,
-            ingredients,
-            steps,
-            information
-        })
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
-            if (err) return res.send("Write file error!")
-    
-            return res.redirect("/admin/recipes")
+        Recipe.create(req.body, recipe => {
+            return res.redirect(`/admin/recipes/${ recipe.id }`)
         })
     },
     
     show(req, res) {
         const recipeId = req.params.id
-        
-        if(!data.recipes[recipeId - 1]) {
-            res.send("A receita não existe")
-        } else {
-            res.render("admin/recipes/recipe_info", { recipe: data.recipes[recipeId - 1], recipeId })
-        }
+
+        Recipe.find(recipeId, recipe => {
+            if (!recipe) return res.send("A receita não existe")
+
+            return res.render("admin/recipes/recipe_info", { recipe })
+        })
+
     },
     
     edit(req, res) {
         const recipeId = req.params.id
         
-        if(!data.recipes[recipeId - 1]) {
-            res.send("A receita não existe")
-        } else {
-            res.render("admin/recipes/edit", { recipe: data.recipes[recipeId - 1], recipeId })
-        }
+        Recipe.find(recipeId, recipe => {
+            if (!recipe) return res.send("A receita não existe")
+
+            Recipe.chefSelectOptions(chefs => {
+                return res.render("admin/recipes/edit", { recipe, chefs })
+            })
+        })
     },
     
     put(req, res) {
-        const { id, image, title, author, ingredients, steps, information } = req.body
-        
-        data.recipes[id - 1] = {
-            image,
-            title,
-            author,
-            ingredients,
-            steps,
-            information
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send("Por favor, preencha todos os campos")
+            }
         }
     
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
-            if (err) return res.send("Write file error!")
-    
-            return res.redirect(`/admin/recipes/${id}`)
+        Recipe.update(req.body, () => {
+            return res.redirect(`recipes/${req.body.id}`)
         })
     },
     
     delete(req, res) {
         const { id } = req.body
     
-        const filteredRecipes = data.recipes.filter((recipe, i) => {
-            return i != id - 1
-        })
-    
-        data.recipes = filteredRecipes
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
-            if (err) return res.send("Write file error!")
-    
+        Recipe.delete(id, () => {
             return res.redirect("/admin/recipes")
         })
     }

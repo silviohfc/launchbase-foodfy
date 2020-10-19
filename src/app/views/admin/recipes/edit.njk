@@ -8,7 +8,7 @@
                 <div class="actionButton">
 
                     <form action="/admin/recipes?_method=DELETE" method="POST" id="form-delete">
-                        <input type="hidden" name="id" value="{{ recipeId }}">
+                        <input type="hidden" name="id" value="{{ recipe.id }}">
                         <button type="submit" id="delete">Deletar</a>
                     </form>
                     
@@ -18,7 +18,7 @@
                     
                     <form action="/admin/recipes?_method=PUT" method="POST">
     
-                    <input type="hidden" name="id" value="{{ recipeId }}">
+                    <input type="hidden" name="id" value="{{ recipe.id }}">
                     <button type="submit">Salvar receita</a>
                 </div>
             </div>
