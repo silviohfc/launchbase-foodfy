@@ -49,10 +49,10 @@ function addInput(event) {
 
 document.querySelectorAll(".add-input").forEach(button => button.addEventListener("click", addInput))
 
-function isActive(element) {
-    if (element.pathname === window.location.pathname) {
-        return element.classList.add("active")
+const menuItems = document.querySelectorAll(".menu a")
+
+for (item of menuItems) {
+    if (location.pathname.includes(item.getAttribute("href"))) {
+        item.classList.add("active")
     }
 }
-
-document.querySelectorAll(".menu a").forEach(button => isActive(button))
