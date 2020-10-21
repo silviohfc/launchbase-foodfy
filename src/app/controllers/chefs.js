@@ -23,7 +23,17 @@ module.exports = {
         Chef.find(chefId, chef => {
             if (!chef) return res.send("O chef não existe")
 
-            return res.render("admin/chefs/chef_info", { chef })
+            Chef.findRecipes(chef.id, recipes => {
+                
+                chef = {
+                    ...chef,
+                    recipes: recipes,
+                    total_recipes: recipes.length
+                }
+
+                return res.render("admin/chefs/chef_info", { chef })
+            })
+
         })
 
     },
@@ -55,8 +65,13 @@ module.exports = {
     delete(req, res) {
         const { id } = req.body
     
-        Chef.delete(id, () => {
-            return res.redirect("/admin/chefs")
+        Chef.findRecipes(id, recipes => {
+            if (recipes.length > 0) return res.send("Erro: não é possível deletar chefs que ainda possuem receitas!")
+
+            Chef.delete(id, () => {
+                return res.redirect("/admin/chefs")
+            })
         })
+        
     }
 }

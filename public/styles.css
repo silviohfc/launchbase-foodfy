@@ -223,7 +223,8 @@ footer p {
     margin-top: 4px;
     font-size: 20px;
     line-height: 28px;
-    color: var(--desc)
+    color: var(--desc);
+    margin-bottom: 50px;
 }
 
 .recipeContent {

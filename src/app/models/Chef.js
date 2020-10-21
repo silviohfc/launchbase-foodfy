@@ -49,6 +49,19 @@ module.exports = {
         })
     },
 
+    findRecipes(id, callback) {
+        db.query(`
+        SELECT recipes.*
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        WHERE recipes.chef_id = $1
+        `, [id], (err, results) => {
+            if (err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    },
+
     update(data, callback) {
         const query = `
         UPDATE chefs SET
