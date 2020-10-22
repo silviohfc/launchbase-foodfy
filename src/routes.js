@@ -3,8 +3,9 @@ const routes = express.Router()
 
 const index_recipes = require('./app/controllers/index/recipes')
 const admin_recipes = require('./app/controllers/admin/recipes')
+
+const index_chefs = require('./app/controllers/index/chefs')
 const admin_chefs = require('./app/controllers/admin/chefs')
-const data = require('../data.json')
 
 routes.get("/", (req, res) => {
     return res.render("index")
@@ -21,6 +22,11 @@ routes.get("/about", (req, res) => {
 routes.get("/recipes", index_recipes.index)
 routes.get("/recipes/:id", index_recipes.show)
 
+/* -------------------------------------------------------------------------- */
+/*                                 INDEX CHEFS                                */
+/* -------------------------------------------------------------------------- */
+
+routes.get("/chefs", index_chefs.index)
 
 /* -------------------------------------------------------------------------- */
 /*                                ADMIN RECIPES                               */

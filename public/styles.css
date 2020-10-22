@@ -284,6 +284,15 @@ footer p {
     margin: 0;
 }
 
+/*=== CHEFS ===*/
+
+.desc p {
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: -5px;
+    color: var(--desc)
+}
+
 
 /*=== ADMIN HEADER ===*/
 
@@ -397,6 +406,7 @@ section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc h4 {
 }
 
 section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc p{
+    margin-top: 5px;
     margin-bottom: 10px;
     font-size: 14px;
     line-height: 16px;
