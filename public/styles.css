@@ -287,11 +287,12 @@ header.admin {
     height: 80px;
     margin: 0;
     margin-bottom: 20px;
+    grid-template-columns: 1fr;
 }
 
 .headerContainer {
     width: 940px;
-    margin: 0 auto;
+    justify-self: center;
     display: flex;
     justify-content: flex-start;
     align-items: center;
