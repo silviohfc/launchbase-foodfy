@@ -195,6 +195,9 @@ footer p {
 }
 
 /*=== RECIPE INFO ===*/
+.search {
+    margin-top: 20px;
+}
 
 .recipeInfo,
 .chefInfo {

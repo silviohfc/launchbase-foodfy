@@ -111,5 +111,18 @@ module.exports = {
 
             callback(results.rows)
         })
+    },
+
+    findByName(name, callback) {
+        db.query(`
+        SELECT recipes.*, chefs.name AS author
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        WHERE recipes.title ILIKE '%${name}%'
+        `, (err, results) => {
+            if (err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
     }
 }

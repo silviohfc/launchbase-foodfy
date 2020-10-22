@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 
+const index_recipes = require('./app/controllers/index/recipes')
 const admin_recipes = require('./app/controllers/admin/recipes')
 const admin_chefs = require('./app/controllers/admin/chefs')
 const data = require('../data.json')
@@ -12,9 +13,12 @@ routes.get("/about", (req, res) => {
     return res.render("about")
 })
 
-routes.get("/recipes", (req, res) => {
-    return res.render("recipes/index", { recipes: data.recipes })
-})
+
+/* -------------------------------------------------------------------------- */
+/*                                INDEX RECIPES                               */
+/* -------------------------------------------------------------------------- */
+
+routes.get("/recipes", index_recipes.index)
 routes.get("/recipes/:index", (req, res) => {
     const recipeIndex = req.params.index
     if (!recipes[recipeIndex-1]) {
@@ -23,6 +27,7 @@ routes.get("/recipes/:index", (req, res) => {
         return res.render("recipes/recipe_info", { recipe: data.recipes[recipeIndex-1] })
     }
 })
+
 
 /* -------------------------------------------------------------------------- */
 /*                                ADMIN RECIPES                               */

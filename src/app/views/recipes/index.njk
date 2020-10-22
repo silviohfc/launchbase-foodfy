@@ -3,7 +3,15 @@
 {% block content %}
 
     <section id="topRecipes">
+
+        {% if search %}
+            <h1 class="search">Buscando por "{{ search }}"</h1>
+        {% endif %}
         <div id="topRecipesGrid">
+
+            {% if not recipes %}
+                <p>Nenhuma receita encontrada</p>
+            {% endif %}
 
             {% for recipe in recipes %}
                 <div class="recipeCard" id="{{loop.index}}">
