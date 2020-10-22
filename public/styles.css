@@ -33,9 +33,9 @@ body {
 
 header {
     margin-top: 36px;
-    display: flex;
-    flex-direction: row;
+    display: grid;
     align-items: center;
+    grid-template-columns: 90px 1fr 344px;
     width: 940px;
 }
 
@@ -47,6 +47,19 @@ nav a {
     margin-right: 30px;
     text-decoration: none;
     color: var(--title);
+}
+
+header form {
+    width: 100%;
+    justify-self: end;
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    grid-gap: 8px;
+}
+
+header input {
+    margin: 0;
+    padding: 10px 15px;
 }
 
 /*=== BANNER ===*/
@@ -418,7 +431,7 @@ section#topRecipes div#topRecipesGrid.chefs {
 }
 
 .actionHeader a,
-.actionHeader button[type="submit"] {
+button[type="submit"] {
     text-align: center;
     background-color: var(--action);
     padding: 9px 20px;
@@ -454,7 +467,7 @@ section#topRecipes div#topRecipesGrid.chefs {
     color: var(--title);
 }
 
-.formItem input,
+input,
 .formItem textarea,
 .formItem select {
     width: 100%;
