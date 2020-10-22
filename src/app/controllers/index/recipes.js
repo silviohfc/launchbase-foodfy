@@ -1,4 +1,3 @@
-const Chef = require("../../models/Chef")
 const Recipe = require("../../models/Recipe")
 
 module.exports = {
@@ -16,8 +15,16 @@ module.exports = {
             Recipe.all(recipes => {
                 return res.render("recipes/index", { recipes })
             })
-        }
+        }  
+    },
 
-        
+    show(req, res) {
+        const { id } = req.params
+
+        Recipe.find(id, recipe => {
+            if (!recipe) return res.send("A receita não existe!")
+
+            return res.render("recipes/recipe_info", { recipe })
+        })
     }
 }

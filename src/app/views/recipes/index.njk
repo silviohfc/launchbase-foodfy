@@ -14,7 +14,7 @@
             {% endif %}
 
             {% for recipe in recipes %}
-                <div class="recipeCard" id="{{loop.index}}">
+                <div class="recipeCard" id="{{recipe.id}}">
                     <div class="img" style="background-image: url({{ recipe.image }});"></div>
                     <h4>{{recipe.title}}</h4>
                     <p>{{recipe.author}}</p>

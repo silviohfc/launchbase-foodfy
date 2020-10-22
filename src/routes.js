@@ -19,14 +19,7 @@ routes.get("/about", (req, res) => {
 /* -------------------------------------------------------------------------- */
 
 routes.get("/recipes", index_recipes.index)
-routes.get("/recipes/:index", (req, res) => {
-    const recipeIndex = req.params.index
-    if (!recipes[recipeIndex-1]) {
-        return res.send("A receita não existe!")
-    }else {
-        return res.render("recipes/recipe_info", { recipe: data.recipes[recipeIndex-1] })
-    }
-})
+routes.get("/recipes/:id", index_recipes.show)
 
 
 /* -------------------------------------------------------------------------- */
