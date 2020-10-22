@@ -1,6 +1,10 @@
-const Recipe = require('../models/Recipe')
+const Recipe = require('../../models/Recipe')
 
 module.exports = {
+    redirect(req, res) {
+        res.redirect("/admin/recipes")
+    },
+
     index(req, res) {
         Recipe.all(recipes => {
             return res.render("admin/recipes/index", { recipes })
