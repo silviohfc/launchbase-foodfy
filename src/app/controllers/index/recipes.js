@@ -2,20 +2,29 @@ const Recipe = require("../../models/Recipe")
 
 module.exports = {
     index(req, res) {
-        const { search } = req.query
+        let { search, page, limit } = req.query
 
-        if (search && search !== "") {
-            Recipe.findByName(search, recipes => {
-                if (recipes.length < 1) {
-                    return res.render("recipes/index", { search })
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page - 1)
+
+        const params = {
+            search,
+            page,
+            limit,
+            offset,
+            callback(recipes) {
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page
                 }
-                return res.render("recipes/index", { recipes, search })
-            })
-        } else {
-            Recipe.all(recipes => {
-                return res.render("recipes/index", { recipes })
-            })
-        }  
+
+                return res.render("recipes/index", { recipes, pagination, search })
+            }
+        }
+
+        Recipe.paginate(params)
+
     },
 
     show(req, res) {
