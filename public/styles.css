@@ -27,15 +27,16 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    position: relative;
 }
 
 /*=== HEADER ===*/
 
 header {
     margin-top: 36px;
-    display: flex;
-    flex-direction: row;
+    display: grid;
     align-items: center;
+    grid-template-columns: 90px 1fr 344px;
     width: 940px;
 }
 
@@ -47,6 +48,19 @@ nav a {
     margin-right: 30px;
     text-decoration: none;
     color: var(--title);
+}
+
+header form {
+    width: 100%;
+    justify-self: end;
+    display: grid;
+    grid-template-columns: 1fr 90px;
+    grid-gap: 8px;
+}
+
+header input {
+    margin: 0;
+    padding: 10px 15px;
 }
 
 /*=== BANNER ===*/
@@ -115,7 +129,8 @@ section#topRecipes .recipeCard img {
 }
 
 .recipeCard .img,
-.adminRecipeCard .img {
+.adminRecipeCard .img,
+.adminChefCard .img {
     width: 100%;
     height: 100%;
     border-radius: 15px;
@@ -181,13 +196,18 @@ footer p {
 }
 
 /*=== RECIPE INFO ===*/
+.search {
+    margin-top: 20px;
+}
 
-.recipeInfo {
+.recipeInfo,
+.chefInfo {
     width: 940px;
     text-align: center;
 }
 
-.recipeImg {
+.recipeImg,
+.chefImg {
     width: 100%;
     height: 280px;
     background-repeat: no-repeat;
@@ -196,18 +216,32 @@ footer p {
     border-radius: 15px;
 }
 
-.recipeInfo h4 {
+.chefImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.recipeInfo h4,
+.chefInfo h4 {
     margin-top: 50px;
     font-size: 36px;
     line-height: 42px;
     color: var(--title)
 }
 
-.recipeInfo p {
+.chefInfo h4 {
+    margin-top: 30px;
+}
+
+.recipeInfo p,
+.chefInfo p {
     margin-top: 4px;
     font-size: 20px;
     line-height: 28px;
-    color: var(--desc)
+    color: var(--desc);
+    margin-bottom: 50px;
 }
 
 .recipeContent {
@@ -247,34 +281,80 @@ footer p {
     visibility: visible;
     transition: all ease-in-out 0.3s;
 }
+.description p {
+    margin: 0;
+}
+
+/*=== CHEFS ===*/
+
+.desc p {
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: -5px;
+    color: var(--desc)
+}
 
 
-/*=== ADMIN ===*/
+/*=== ADMIN HEADER ===*/
 
 header.admin {
     background-color: black;
     width: 100%;
     height: 80px;
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    grid-template-columns: 1fr;
 }
 
 .headerContainer {
     width: 940px;
-    margin: 0 auto;
+    justify-self: center;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
+
+header.admin .menu {
+    margin-left: 50px;
+}
+
+header.admin .menu a {
+    color: #999;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-right: 30px;
+}
+
+header.admin .menu a:hover {
+    filter: brightness(2);
+}
+
+header.admin .menu a.active {
+    color: white;
+}
+
+header.admin .menu a:last-child {
+    margin: 0;
+}
+
+/*=== ADMIN PAGE ===*/
 
 section#topRecipes div#topRecipesGrid.admin {
     margin-top: 30px;
     width: 940px;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    text-align: left;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard{
+section#topRecipes h1 {
+    text-align: left;
+}
+
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard,
+section#topRecipes div#topRecipesGrid.admin .adminChefCard{
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     align-items: center;
@@ -283,30 +363,68 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard{
     cursor: initial;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard img{
+section#topRecipes div#topRecipesGrid.admin .adminChefCard {
+    grid-template-columns: 64px 1fr;
+}
+
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard img,
+.adminRecipeCard .img{
     height: 80px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc{
+section#topRecipes div#topRecipesGrid.admin .adminChefCard img{
+    height: 64px;
+}
+
+section#topRecipes div#topRecipesGrid.admin .adminChefCard .img{
+    height: 64px;
+    width: 64px;
+    justify-self: center;
+    border-radius: 50%;
+}
+
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc,
+section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc{
     align-self: start;
     margin-left: 20px;
+    line-height: 21px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc h4{
+section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc{
+    align-self: center;
+}
+
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc h4,
+section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc h4{
     margin: 0;
     font-weight: initial;
+    font-size: 16px;
+    line-height: 21px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc p{
+section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc h4 {
     margin-bottom: 10px;
 }
 
-section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc p{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a,
+section#topRecipes div#topRecipesGrid.admin .adminChefCard .desc a{
     text-decoration: none;
     font-size: 14px;
     color: var(--action);
     font-weight: bold;
 }
+
+section#topRecipes div#topRecipesGrid.chefs {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 
 /*=== ADMIN RECIPE INFO ===*/
 .actionHeader {
@@ -331,7 +449,7 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
 }
 
 .actionHeader a,
-.actionHeader button[type="submit"] {
+button[type="submit"] {
     text-align: center;
     background-color: var(--action);
     padding: 9px 20px;
@@ -367,8 +485,9 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
     color: var(--title);
 }
 
-.formItem input,
-.formItem textarea {
+input,
+.formItem textarea,
+.formItem select {
     width: 100%;
     margin-top: 10px;
     padding: 15px 20px;
@@ -391,4 +510,53 @@ section#topRecipes div#topRecipesGrid.admin .adminRecipeCard .desc a{
     margin-top: 15px;
     outline: none;
     cursor: pointer;
+}
+
+.formItem select {
+    background-color: white;
+
+    background:
+    linear-gradient(45deg, transparent 50%, #999 50%),
+    linear-gradient(135deg, #999 50%, transparent 50%);
+    background-position:
+    calc(100% - 20px) calc(10px + 10px),
+    calc(100% - 15px) calc(10px + 10px),
+    100% 0;
+    background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+    background-repeat: no-repeat;
+
+    /* reset */
+    
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+}
+
+/*=== PAGINATION ===*/
+
+.pagination {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+.pagination a,
+.pagination span{
+    text-decoration: none;
+    margin-right: 8px;
+    background-color: var(--action);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.pagination a:last-child {
+    margin: 0;
 }

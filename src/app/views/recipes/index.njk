@@ -3,10 +3,18 @@
 {% block content %}
 
     <section id="topRecipes">
+
+        {% if search %}
+            <h1 class="search">Buscando por "{{ search }}"</h1>
+        {% endif %}
         <div id="topRecipesGrid">
 
+            {% if not recipes %}
+                <p>Nenhuma receita encontrada</p>
+            {% endif %}
+
             {% for recipe in recipes %}
-                <div class="recipeCard" id="{{loop.index}}">
+                <div class="recipeCard" id="{{recipe.id}}">
                     <div class="img" style="background-image: url({{ recipe.image }});"></div>
                     <h4>{{recipe.title}}</h4>
                     <p>{{recipe.author}}</p>
@@ -15,6 +23,12 @@
 
         </div>
     </section>
+
+    <div class="pagination"
+        data-page={{ pagination.page }}
+        data-total={{ pagination.total }}
+        data-search={{ search }}
+    ></div>
 
     <script src="/scripts.js"></script>
 {% endblock %}

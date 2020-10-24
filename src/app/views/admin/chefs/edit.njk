@@ -3,12 +3,12 @@
 {% block content %}
 
         <div class="actionHeader">
-            <h2>Editando receita</h2>
+            <h2>Editando chef</h2>
             <div class="actionButtons">
                 <div class="actionButton">
 
-                    <form action="/admin/recipes?_method=DELETE" method="POST" id="form-delete">
-                        <input type="hidden" name="id" value="{{ recipeId }}">
+                    <form action="/admin/chefs?_method=DELETE" method="POST" id="form-delete">
+                        <input type="hidden" name="id" value="{{ chef.id }}">
                         <button type="submit" id="delete">Deletar</a>
                     </form>
                     
@@ -16,15 +16,15 @@
 
                 <div class="actionButton">
                     
-                    <form action="/admin/recipes?_method=PUT" method="POST">
+                    <form action="/admin/chefs?_method=PUT" method="POST">
     
-                    <input type="hidden" name="id" value="{{ recipeId }}">
-                    <button type="submit">Salvar receita</a>
+                    <input type="hidden" name="id" value="{{ chef.id }}">
+                    <button type="submit">Salvar chef</a>
                 </div>
             </div>
         </div>
 
-        {% include "admin/fields.njk" %}
+        {% include "admin/chefs/fields.njk" %}
         
     </form>
 
@@ -34,7 +34,7 @@
         const formDelete = document.querySelector("#form-delete")
         
         formDelete.addEventListener("submit", e => {
-            const confirmation = confirm("Tem certeza que deseja deletar esta receita?")
+            const confirmation = confirm("Tem certeza que deseja deletar este chef?")
             if(!confirmation) {
                 e.preventDefault()
             }
