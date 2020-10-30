@@ -1,12 +1,27 @@
 <div class="formItem">
     <h5>Imagem da receita</h5>
-    <input 
-        type="text" 
-        name="image" 
-        placeholder="http://" 
-        value="{{ recipe.image }}"
-        required
-    >
+
+    <div class="images">
+
+        <div class="image-input">
+            <input 
+                type="file" 
+                id="images-input"
+                name="images"
+                multiple
+                accept="image/*"
+                onchange="ImagesUpload.handleFileInput(event)"
+                required
+            >
+
+            <i class="material-icons">add</i>
+        </div>
+
+        <div class="preview">
+
+        </div>
+
+    </div>
 </div>
 
 <div class="formItem">

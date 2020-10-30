@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-* { margin: 0; padding: 0; border: 0; font-family: Roboto;}
+* { margin: 0; padding: 0; border: 0; font-family: Roboto; box-sizing: border-box;}
 
 :root {
     --title: #111;
@@ -535,6 +535,117 @@ input,
     box-sizing: border-box;
     -webkit-appearance:none;
     -moz-appearance:none;
+}
+
+.formItem .images {
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    grid-gap: 10px;
+    
+    margin-top: 10px;
+
+    height: 148px;
+    width: 100%;
+}
+
+.formItem .images .image-input {
+    width: 100%;
+    height: 100%;
+    
+    position: relative;
+}
+
+.formItem .images .image-input input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 100;
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+.formItem .images .image-input i {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background-color: white;
+    color: #999;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+    
+    border: 1px solid #ddd;
+    border-radius: 4px;
+} 
+
+.formItem .images .preview {
+    display: grid;
+    grid-template-columns: repeat(5, 148px);
+    grid-gap: 10px;
+}
+
+.formItem .images .preview .image-item {
+    position: relative;
+}
+
+.formItem .images .preview .image-item,
+.formItem .images .preview .image-item img {
+    width: 100%;
+    height: 148px;
+
+    border-radius: 4px;
+}
+
+.formItem .images .preview .image-item img {
+    border: 1px solid #ddd;
+
+    object-fit: cover;
+}
+
+.formItem .images .preview .image-item i {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background: rgba(255,255,255,.5);
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: red;
+    font-size: 28px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition: opacity 200ms;
+}
+
+.formItem .images .preview .image-item:hover i {
+    opacity: 1;
 }
 
 /*=== PAGINATION ===*/
