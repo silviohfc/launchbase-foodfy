@@ -1,4 +1,5 @@
 const Recipe = require('../../models/Recipe')
+const File = require('../../models/File')
 
 module.exports = {
     redirect(req, res) {
@@ -17,10 +18,30 @@ module.exports = {
         })        
     },
     
-    post(req, res) {
-        Recipe.create(req.body, recipe => {
-            return res.redirect(`/admin/recipes/${ recipe.id }`)
-        })
+    async post(req, res) {
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send('Por favor, preencha todos os campos!')
+            }
+        }
+
+        if (req.files.length == 0) {
+            return res.send('Por favor, envie ao menos uma imagem!')
+        }
+
+        
+        let results = await Recipe.create(req.body)
+        const recipeId = results.rows[0].id
+        
+        const filesPromise = req.files.map(file => File.create({ ...file }))
+        results = await Promise.all(filesPromise)
+        
+        const recipeFilesPromise = results.map(file => File.createRecipeFile(recipeId, file.rows[0].id))
+        await Promise.all(recipeFilesPromise)
+
+        return res.redirect(`/admin/recipes/${recipeId}/edit`)
     },
     
     show(req, res) {

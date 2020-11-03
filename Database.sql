@@ -1,5 +1,5 @@
 CREATE TABLE "recipes" (
-  "id" int UNIQUE PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "chef_id" int,
   "title" text,
   "ingredients" text[],
@@ -9,7 +9,7 @@ CREATE TABLE "recipes" (
 );
 
 CREATE TABLE "chefs" (
-  "id" int UNIQUE PRIMARY KEY,
+  "id" serial PRIMARY KEY,
   "file_id" int,
   "name" text,
   "created_at" timestamp DEFAULT (now())
