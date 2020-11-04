@@ -38,33 +38,27 @@ module.exports = {
         return db.query(query, values)
     },
 
-    find(id, callback) {
-        db.query(`
-        SELECT recipes.*, chefs.name AS author
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE recipes.id = $1
-        `, [id], (err, results) => {
-            if (err) throw `Database Error! ${err}`
-
-            callback(results.rows[0])
-        })
+    find(id) {
+        return db.query(`
+            SELECT recipes.*, chefs.name AS author
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            WHERE recipes.id = $1
+        `, [id])
     },
 
-    update(data, callback) {
+    update(data) {
         const query = `
         UPDATE recipes SET
-            image=($1),
-            title=($2),
-            ingredients=($3),
-            preparation=($4),
-            information=($5),
-            chef_id=($6)
-        WHERE id = $7
+            title=($1),
+            ingredients=($2),
+            preparation=($3),
+            information=($4),
+            chef_id=($5)
+        WHERE id = $6
         `
 
         const values = [
-            data.image,
             data.title,
             data.ingredients,
             data.steps,
@@ -73,13 +67,7 @@ module.exports = {
             data.id
         ]
 
-        console.log(values)
-
-        db.query(query, values, (err, results) => {
-            if (err) throw `Database Error! ${err}`
-
-            callback()
-        })
+        return db.query(query, values)
     },
 
     delete(id, callback) {
@@ -93,16 +81,21 @@ module.exports = {
         })
     },
 
-    chefSelectOptions(callback) {
-        db.query(`
-        SELECT name, id
-        FROM chefs
-        ORDER BY chefs.name ASC
-        `, (err, results) => {
-            if (err) throw `Database Error! ${err}`
+    findImages(recipeId) {
+        return db.query(`
+            SELECT * 
+            FROM files
+            LEFT JOIN recipe_files ON recipe_files.file_id = files.id
+            WHERE recipe_files.recipe_id = $1
+        `, [recipeId])
+    },
 
-            callback(results.rows)
-        })
+    chefSelectOptions() {
+        return db.query(`
+            SELECT name, id
+            FROM chefs
+            ORDER BY chefs.name ASC
+        `)
     },
 
     findByName(name, callback) {

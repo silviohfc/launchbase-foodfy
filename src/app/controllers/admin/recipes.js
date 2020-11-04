@@ -12,10 +12,11 @@ module.exports = {
         })
     },
     
-    create(req, res) {
-        Recipe.chefSelectOptions(chefs => {
-            return res.render("admin/recipes/create", { chefs })
-        })        
+    async create(req, res) {
+        const results = await Recipe.chefSelectOptions()
+        const chefs = results.rows
+
+        return res.render("admin/recipes/create", { chefs })    
     },
     
     async post(req, res) {
@@ -25,10 +26,6 @@ module.exports = {
             if (req.body[key] == "") {
                 return res.send('Por favor, preencha todos os campos!')
             }
-        }
-
-        if (req.files.length == 0) {
-            return res.send('Por favor, envie ao menos uma imagem!')
         }
 
         
@@ -55,30 +52,59 @@ module.exports = {
 
     },
     
-    edit(req, res) {
+    async edit(req, res) {
         const recipeId = req.params.id
         
-        Recipe.find(recipeId, recipe => {
-            if (!recipe) return res.send("A receita não existe")
+        let result = await Recipe.find(recipeId)
+        const recipe = result.rows[0]
 
-            Recipe.chefSelectOptions(chefs => {
-                return res.render("admin/recipes/edit", { recipe, chefs })
-            })
-        })
+        result = await Recipe.chefSelectOptions()
+        const chefs = result.rows
+
+        result = await Recipe.findImages(recipeId)
+        let images = result.rows
+
+        images = images.map(file => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+        }))
+
+        if (!recipe) return res.send("A receita não existe")
+
+        return res.render("admin/recipes/edit", { recipe, chefs, images })
     },
     
-    put(req, res) {
+    async put(req, res) {
         const keys = Object.keys(req.body)
 
         for (key of keys) {
-            if (req.body[key] == "") {
-                return res.send("Por favor, preencha todos os campos")
+            if (req.body[key] == "" && key != "removed_files") {
+                return res.send("Por favor, preencha todos os campos!")
             }
         }
+
+        if (req.files.length != 0) {
+            const newFilesPromise = req.files.map(file => File.create({ ...file }))
+            const results = await Promise.all(newFilesPromise)
+            
+            const recipeFilesPromise = results.map(file => File.createRecipeFile(req.body.id, file.rows[0].id))
+            await Promise.all(recipeFilesPromise)
+        }
+
+
+
+        if (req.body.removed_files) {
+            const removedFiles = req.body.removed_files.split(",")
+            removedFiles.pop()
+
+            const removedFilesPromise = removedFiles.map(id => File.delete(id))
+
+            await Promise.all(removedFilesPromise)
+        }
+
+        await Recipe.update(req.body)
     
-        Recipe.update(req.body, () => {
-            return res.redirect(`recipes/${req.body.id}`)
-        })
+        return res.redirect(`recipes/${req.body.id}`)
     },
     
     delete(req, res) {

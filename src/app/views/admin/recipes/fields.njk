@@ -11,14 +11,24 @@
                 multiple
                 accept="image/*"
                 onchange="ImagesUpload.handleFileInput(event)"
-                required
             >
 
             <i class="material-icons">add</i>
         </div>
 
         <div class="preview">
+            {% if images %}
+                
+                {% for image in images %}
+                    <div class="image-item" id="{{image.file_id}}">
+                        <img src="{{image.src}}">
+                        <i class="material-icons" onclick="ImagesUpload.removeOldImage(event)">close</i>
+                    </div>
+                {% endfor %}
 
+                <input type="hidden" name="removed_files">
+
+            {% endif %}
         </div>
 
     </div>

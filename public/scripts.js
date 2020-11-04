@@ -96,6 +96,28 @@ const ImagesUpload = {
         ImagesUpload.input.files = ImagesUpload.getAllFiles()
 
         imageDiv.remove()
+    },
+
+    removeOldImage(event) {
+        const imageDiv = event.target.parentNode
+
+        if (imageDiv.id) {
+            const removedFiles = document.querySelector('input[name="removed_files"]')
+            if (removedFiles) {
+                removedFiles.value += `${imageDiv.id},`
+            }
+        }
+
+        imageDiv.remove()
+    },
+
+    verifyLength(event) {
+        const totalImages = document.querySelector('.preview').childElementCount - 1
+
+        if (totalImages <= 0) {
+            alert("Por favor, insira ao menos uma imagem!")
+            event.preventDefault()
+        }
     }
 }
 

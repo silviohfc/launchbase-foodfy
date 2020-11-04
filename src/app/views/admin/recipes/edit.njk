@@ -19,7 +19,7 @@
                     <form action="/admin/recipes?_method=PUT" method="POST" enctype="multipart/form-data">
     
                     <input type="hidden" name="id" value="{{ recipe.id }}">
-                    <button type="submit">Salvar receita</a>
+                    <button type="submit" onclick="ImagesUpload.verifyLength(event)">Salvar receita</a>
                 </div>
             </div>
         </div>

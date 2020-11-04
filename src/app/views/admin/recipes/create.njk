@@ -5,7 +5,7 @@
     <form action="/admin/recipes" method="POST" enctype="multipart/form-data">
         <div class="actionHeader">
             <h2>Criando receita</h2>
-            <button type="submit">Salvar receita</a>
+            <button type="submit" onclick="ImagesUpload.verifyLength(event)">Salvar receita</a>
         </div>
 
         {% include "admin/recipes/fields.njk" %}
