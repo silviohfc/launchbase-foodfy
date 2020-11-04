@@ -112,12 +112,25 @@ const ImagesUpload = {
     },
 
     verifyLength(event) {
-        const totalImages = document.querySelector('.preview').childElementCount - 1
+        const totalImages = document.querySelector('.preview').childElementCount
 
-        if (totalImages <= 0) {
+        if (totalImages == 0) {
             alert("Por favor, insira ao menos uma imagem!")
             event.preventDefault()
         }
+    }
+}
+
+const ImageGallery = {
+    previews: document.querySelectorAll('.gallery-preview img'),
+    highlight: document.querySelector('.gallery .highlight > img'),
+    setImage(event) {
+        const { target } = event
+
+        ImageGallery.previews.forEach(preview => preview.classList.remove('active'))
+        target.classList.add('active')
+
+        ImageGallery.highlight.src = target.src
     }
 }
 

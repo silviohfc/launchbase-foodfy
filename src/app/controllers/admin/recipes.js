@@ -6,10 +6,12 @@ module.exports = {
         res.redirect("/admin/recipes")
     },
 
-    index(req, res) {
-        Recipe.all(recipes => {
-            return res.render("admin/recipes/index", { recipes })
-        })
+    async index(req, res) {
+        const results = await Recipe.all()
+        const recipes = results.rows
+
+        return res.render("admin/recipes/index", { recipes })
+
     },
     
     async create(req, res) {
@@ -41,15 +43,19 @@ module.exports = {
         return res.redirect(`/admin/recipes/${recipeId}/edit`)
     },
     
-    show(req, res) {
+    async show(req, res) {
         const recipeId = req.params.id
 
-        Recipe.find(recipeId, recipe => {
-            if (!recipe) return res.send("A receita não existe")
+        let results = await Recipe.find(recipeId)
+        const recipe = results.rows[0]
 
-            return res.render("admin/recipes/recipe_info", { recipe })
-        })
+        results = await Recipe.findImages(recipe.id)
+        const images = results.rows.map(file => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+        }))
 
+        return res.render("admin/recipes/recipe_info", { recipe, images })
     },
     
     async edit(req, res) {

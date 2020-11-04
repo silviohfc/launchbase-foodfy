@@ -2,17 +2,13 @@ const db = require('../../config/db')
 const { date } = require('../../lib/utils')
 
 module.exports = {
-    all(callback) {
-        db.query(`
-        SELECT recipes.*, chefs.name AS author
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        ORDER BY id ASC
-        `, (err, results) => {
-            if (err) throw `Database Error! ${err}`
-
-            callback(results.rows)
-        })
+    all() {
+        return db.query(`
+            SELECT recipes.*, chefs.name AS author
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            ORDER BY id ASC
+        `)
     },
 
     create(data) {
