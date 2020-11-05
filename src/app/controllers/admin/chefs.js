@@ -80,16 +80,12 @@ module.exports = {
             return res.redirect(`chefs/${id}`)
         }
 
-        console.log("NOVA IMAGEM")
     
-        console.log("CRIANDO NOVA IMAGEM")
         let results = await File.create(req.files[0])
         const newAvatar = results.rows[0]
 
-        console.log("UPDATE DO ID DE REFERENCIA")
         await Chef.update(id, name, newAvatar.id) 
 
-        console.log("DELETANDO ANTIGA")
         await File.delete(file_id)
 
         return res.redirect(`chefs/${id}`)
