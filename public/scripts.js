@@ -8,7 +8,10 @@ const ImagesUpload = {
         const { files: fileList } = event.target
         ImagesUpload.input = event.target
         
-        if (ImagesUpload.hasLimit(event)) return
+        if (ImagesUpload.hasLimit(event)) {
+            ImagesUpload.updateInputFiles()
+            return
+        }
 
         Array.from(fileList).forEach(file => {
 
@@ -89,11 +92,14 @@ const ImagesUpload = {
 
     removeImage(event) {
         const imageDiv = event.target.parentNode
-        const imagesArray = Array.from(ImagesUpload.preview.children)
-        const index = imagesArray.indexOf(imageDiv)
+        const newFiles = Array.from(ImagesUpload.preview.children).filter(file => {
+            if (file.classList.contains('image-item') && !file.getAttribute('id')) return true
+        })
+
+        const index = newFiles.indexOf(imageDiv)
 
         ImagesUpload.files.splice(index, 1)
-        ImagesUpload.input.files = ImagesUpload.getAllFiles()
+        ImagesUpload.updateInputFiles()
 
         imageDiv.remove()
     },
@@ -118,6 +124,10 @@ const ImagesUpload = {
             alert("Por favor, insira ao menos uma imagem!")
             event.preventDefault()
         }
+    },
+
+    updateInputFiles() {
+        ImagesUpload.input.files = ImagesUpload.getAllFiles()
     }
 }
 

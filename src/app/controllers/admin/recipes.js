@@ -89,23 +89,25 @@ module.exports = {
             }
         }
 
-        if (req.files.length != 0) {
-            const newFilesPromise = req.files.map(file => File.create({ ...file }))
-            const results = await Promise.all(newFilesPromise)
-            
-            const recipeFilesPromise = results.map(file => File.createRecipeFile(req.body.id, file.rows[0].id))
-            await Promise.all(recipeFilesPromise)
-        }
-
-
-
         if (req.body.removed_files) {
             const removedFiles = req.body.removed_files.split(",")
             removedFiles.pop()
 
             const removedFilesPromise = removedFiles.map(id => File.delete(id))
-
             await Promise.all(removedFilesPromise)
+        }
+
+        if (req.files.length != 0) {
+            const oldFiles = await Recipe.findImages(req.body.id)
+            const totalFiles = oldFiles.rows.length + req.files.length
+
+            if (totalFiles <= 5) {
+                const newFilesPromise = req.files.map(file => File.create({ ...file }))
+                const results = await Promise.all(newFilesPromise)
+                
+                const recipeFilesPromise = results.map(file => File.createRecipeFile(req.body.id, file.rows[0].id))
+                await Promise.all(recipeFilesPromise)
+            }
         }
 
         await Recipe.update(req.body)
