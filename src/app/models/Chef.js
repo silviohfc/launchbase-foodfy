@@ -16,73 +16,72 @@ module.exports = {
         })
     },
 
-    create(data, callback) {
-        const query = `
-        INSERT INTO chefs (
-            name,
-            avatar_url,
-            created_at
-        ) VALUES ($1, $2, $3)
-        RETURNING id
-        `
+    create(name, fileId) {
+        try {
+            const query = `
+                INSERT INTO chefs (
+                    file_id,
+                    name
+                ) VALUES ($1, $2)
+                RETURNING id
+            `
 
-        const values = [
-            data.name,
-            data.image,
-            date(Date.now()).iso
-        ]
+            const values = [
+                fileId,
+                name
+            ]
 
-        db.query(query, values, (err, results) => {
-            if (err) throw `Database Error! ${err}`
+            return db.query(query, values)
 
-            callback(results.rows[0])
-        })
+        } catch(err) {
+            console.log(err)
+        }
     },
 
-    find(id, callback) {
-        db.query(`
-        SELECT *
-        FROM chefs
-        WHERE id = $1
-        `, [id], (err, results) => {
-            if (err) throw `Database Error! ${err}`
-
-            callback(results.rows[0])
-        })
+    find(id) {
+        return db.query(`
+            SELECT chefs.*, files.path AS avatar_path
+            FROM chefs
+            LEFT JOIN files ON (files.id = chefs.file_id)
+            WHERE chefs.id = $1
+            `, [id])
     },
 
-    findRecipes(id, callback) {
-        db.query(`
-        SELECT recipes.*
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE recipes.chef_id = $1
-        `, [id], (err, results) => {
-            if (err) throw `Database Error! ${err}`
-
-            callback(results.rows)
-        })
+    findRecipes(id) {
+        return db.query(`
+            SELECT recipes.*
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            WHERE recipes.chef_id = $1
+        `, [id])
     },
 
-    update(data, callback) {
-        const query = `
-        UPDATE chefs SET
-            name=($1),
-            avatar_url=($2)
-        WHERE id = $3
-        `
+    update(id, name, fileId) {
+        try {
+            let query = `
+                UPDATE chefs SET
+                    name=('${name}')
+            `
+            if (fileId) {
+                query = `
+                    ${query},
+                    file_id=(${fileId})
+                `
+            }
 
-        const values = [
-            data.name,
-            data.image,
-            data.id
-        ]
+            query = `
+                ${query}
+                WHERE id = ${id}
+            `
 
-        db.query(query, values, (err, results) => {
-            if (err) throw `Database Error! ${err}`
+            return db.query(query)
 
-            callback()
-        })
+        }
+
+        catch (err) {
+            console.log(err)
+        }
+        
     },
 
     delete(id, callback) {

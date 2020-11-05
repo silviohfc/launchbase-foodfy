@@ -11,11 +11,25 @@
 
 <div class="formItem">
     <h5>Avatar</h5>
-    <input 
-        type="text" 
-        name="image" 
-        placeholder="http://" 
-        value="{{ chef.avatar_url }}"
-        required
-    >
+
+    {% if chef %}
+        <input type="text" placeholder="{{chef.avatar_path}}" readonly>
+        <input type="hidden" name="file_id" value={{chef.file_id}}>
+    {% endif %}
+
+    <div class="uploadButton">        
+        <input 
+            type="file" 
+            name="image"
+            accept="image/*"
+            {% if not chef %}
+                required
+            {% endif %}
+        >
+
+        <div class="button">
+            Enviar Avatar
+        </div>
+    </div>
+    
 </div>

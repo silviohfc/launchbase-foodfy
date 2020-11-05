@@ -31,7 +31,7 @@ const ImagesUpload = {
             reader.readAsDataURL(file)
         })
     
-        ImagesUpload.input.files = ImagesUpload.getAllFiles()
+        ImagesUpload.updateInputFiles()
     },
 
     hasLimit(event) {

@@ -41,10 +41,15 @@ module.exports = {
     async delete(id) {
 
         try {
-            const result = await db.query(`SELECT * FROM files WHERE id = $1`, [id])
+            let result = await db.query(`SELECT * FROM files WHERE id = $1`, [id])
             const file = result.rows[0]
 
-            await db.query(`DELETE FROM recipe_files WHERE file_id = $1`, [file.id])
+            result = await db.query(`SELECT * FROM recipe_files WHERE file_id = $1`, [id])
+            const recipe_file = result.rows[0]
+
+            if (recipe_file) {
+                await db.query(`DELETE FROM recipe_files WHERE file_id = $1`, [id])
+            }
     
             fs.unlinkSync(file.path)
 
@@ -52,7 +57,9 @@ module.exports = {
                 DELETE FROM files WHERE id = $1
             `, [id])
 
-        } catch(err) {
+        } 
+        
+        catch(err) {
             console.log(err)
         }
         

@@ -449,7 +449,8 @@ section#topRecipes div#topRecipesGrid.chefs {
 }
 
 .actionHeader a,
-button[type="submit"] {
+button[type="submit"],
+.button {
     text-align: center;
     background-color: var(--action);
     padding: 9px 20px;
@@ -697,6 +698,43 @@ input,
 .formItem .images .preview .image-item:hover i {
     opacity: 1;
 }
+
+.formItem .uploadButton {
+    position: relative;
+
+    width: 140px;
+    height: 38px;
+
+    margin-top: 10px;
+}
+
+.formItem .uploadButton .button {
+    margin: 0;
+}
+
+.formItem .uploadButton input {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+
+    cursor: pointer;
+}
+
+.formItem .uploadButton input::-webkit-file-upload-button {
+    cursor: pointer;
+}
+
+
 
 /*=== PAGINATION ===*/
 
