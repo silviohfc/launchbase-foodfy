@@ -9,7 +9,12 @@
             <a href="/admin/chefs/{{ chef.id }}/edit">Editar Chef</a>
         </div>
 
-        <div class="chefImg" style="background-image: url({{ chef.avatar_url }});"></div>
+        <div class="gallery">
+            <div class="highlight">
+                <img class="chefImg" src="{{chef.src}}" alt="{{chef.name}}">
+            </div>
+        </div>
+
         <h4>{{ chef.name }}</h4>
         <p>{{ chef.total_recipes }} 
             {% if chef.total_recipes > 1 %}

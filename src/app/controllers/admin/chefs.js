@@ -2,10 +2,15 @@ const Chef = require('../../models/Chef')
 const File = require('../../models/File')
 
 module.exports = {
-    index(req, res) {
-        Chef.all(chefs => {
-            return res.render("admin/chefs/index", { chefs })
+    async index(req, res) {
+        const results = await Chef.all()
+        const chefs = results.rows
+
+        chefs.forEach(chef => {
+            chef.avatar_path = `${req.protocol}://${req.headers.host}${chef.avatar_path.replace("public", "")}`
         })
+        
+        return res.render("admin/chefs/index", { chefs })
     },
     
     create(req, res) {
@@ -44,7 +49,8 @@ module.exports = {
         chef = {
             ...chef,
             recipes,
-            total_recipes: recipes.length
+            total_recipes: recipes.length,
+            src: `${req.protocol}://${req.headers.host}${chef.avatar_path.replace("public", "")}`
         }
 
         return res.render("admin/chefs/chef_info", { chef })

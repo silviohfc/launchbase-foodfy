@@ -86,6 +86,16 @@ module.exports = {
         `, [recipeId])
     },
 
+    findFirstImage(recipeId) {
+        return db.query(`
+            SELECT path 
+            FROM files
+            LEFT JOIN recipe_files ON recipe_files.file_id = files.id
+            WHERE recipe_files.recipe_id = $1
+            LIMIT 1
+        `, [recipeId])
+    },
+
     chefSelectOptions() {
         return db.query(`
             SELECT name, id

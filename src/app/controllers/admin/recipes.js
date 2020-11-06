@@ -8,7 +8,15 @@ module.exports = {
 
     async index(req, res) {
         const results = await Recipe.all()
-        const recipes = results.rows
+        let recipes = results.rows
+
+        const firstImagesPromise = recipes.map(recipe => Recipe.findFirstImage(recipe.id))
+        const images = await Promise.all(firstImagesPromise)
+
+        recipes = recipes.map((recipe, index) => ({
+            ...recipe,
+            image: `${req.protocol}://${req.headers.host}${images[index].rows[0].path.replace("public", "")}`
+        }))
 
         return res.render("admin/recipes/index", { recipes })
 
@@ -25,7 +33,8 @@ module.exports = {
         const keys = Object.keys(req.body)
 
         for (key of keys) {
-            if (req.body[key] == "") {
+            if (req.body[key] == "" && key != 'removed_files') {
+                console.log(`${key} falhou`)
                 return res.send('Por favor, preencha todos os campos!')
             }
         }
@@ -40,7 +49,7 @@ module.exports = {
         const recipeFilesPromise = results.map(file => File.createRecipeFile(recipeId, file.rows[0].id))
         await Promise.all(recipeFilesPromise)
 
-        return res.redirect(`/admin/recipes/${recipeId}/edit`)
+        return res.redirect(`/admin/recipes/${recipeId}/`)
     },
     
     async show(req, res) {

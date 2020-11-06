@@ -223,12 +223,17 @@ footer p {
     margin: 0 auto;
 }
 
+
 .recipeInfo h4,
 .chefInfo h4 {
     margin-top: 50px;
     font-size: 36px;
     line-height: 42px;
     color: var(--title)
+}
+
+.recipeInfo h4 {
+    margin-top: 0;
 }
 
 .chefInfo h4 {
@@ -485,6 +490,12 @@ button[type="submit"],
     border-radius: 16px;
 
     object-fit: cover;
+}
+
+.gallery .highlight > img.chefImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }
 
 .gallery-preview {
